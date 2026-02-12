@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTERVIEW TRAINING CENTER</title>
+    <style>
+        :root {
+            --bg-black: #0a0a0a;
+            --tactical-khaki: #7b7e5e;
+            --metallic-silver: #c0c0c0;
+            --dim-silver: #4a4a4a;
+            --alert-red: #ff3e3e;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--metallic-silver);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 전술 스크린 배경 효과 */
+        .screen-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            border: 2px solid var(--tactical-khaki);
+            padding: 2rem;
+            position: relative;
+            background: rgba(10, 10, 10, 0.9);
+            box-shadow: 0 0 20px rgba(123, 126, 94, 0.2);
+        }
+
+        .header {
+            border-bottom: 1px solid var(--tactical-khaki);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .title-area h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            color: var(--tactical-khaki);
+        }
+
+        .status-tag {
+            font-size: 0.8rem;
+            color: var(--alert-red);
+            border: 1px solid var(--alert-red);
+            padding: 2px 8px;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .grid-select {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .job-card {
+            border: 1px solid var(--dim-silver);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .job-card:hover {
+            border-color: var(--metallic-silver);
+            background: rgba(192, 192, 192, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .job-card.active {
+            border-color: var(--tactical-khaki);
+            background: rgba(123, 126, 94, 0.1);
+            box-shadow: inset 0 0 10px rgba(123, 126, 94, 0.3);
+        }
+
+        .job-card h3 {
+            margin-top: 0;
+            color: var(--metallic-silver);
+        }
+
+        .btn-start {
+            margin-top: 2rem;
+            width: 100%;
+            background: var(--tactical-khaki);
+            color: var(--bg-black);
+            border: none;
+            padding: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            letter-spacing: 5px;
+            transition: all 0.2s;
+        }
+
+        .btn-start:hover {
+            background: var(--metallic-silver);
+            box-shadow: 0 0 15px var(--metallic-silver);
+        }
+
+        .footer-info {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: var(--dim-silver);
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-overlay"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="title-area">
+                <span style="font-size: 0.7rem;">SYSTEM: STAGE_SELECTOR v1.0</span>
+                <h1>[훈련 구역 선택]</h1>
+            </div>
+            <div class="status-tag">READY TO DRILL</div>
+        </div>
+
+        <div class="grid-select">
+            <div class="job-card active">
+                <h3>01. BACKEND</h3>
+                <p style="font-size: 0.8rem;">서버 아키텍처 및 로직 트레이닝</p>
+            </div>
+            <div class="job-card">
+                <h3>02. FRONTEND</h3>
+                <p style="font-size: 0.8rem;">UI/UX 구현 및 최적화 트레이닝</p>
+            </div>
+            <div class="job-card">
+                <h3>03. DATA & AI</h3>
+                <p style="font-size: 0.8rem;">모델 설계 및 데이터 분석 트레이닝</p>
+            </div>
+            <div class="job-card">
+                <h3>04. INFRA & SEC</h3>
+                <p style="font-size: 0.8rem;">시스템 보안 및 네트워크 트레이닝</p>
+            </div>
+        </div>
+
+        <button class="btn-start" onclick="location.href='#training'">훈련 개시 (START DRILL)</button>
+
+        <div class="footer-info">
+            LATENCY: 14MS | ENCRYPTION: AES-256 | SESSION: ACTIVE
+        </div>
+    </div>
+</body>
+</html>
