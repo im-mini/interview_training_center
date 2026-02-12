@@ -1,0 +1,202 @@
+{
+  "BE-JAVA-001": {
+    "role": "BACKEND",
+    "stacks": ["java", "jvm"],
+    "difficulty": "Medium",
+    "question": "Java 소스 코드가 실행되는 전체 과정을 JVM 메모리 구조와 함께 설명해주세요.",
+    "tts_text": "자바 소스 코드가 실행되는 전체 과정을 제이뷔엠 메모리 구조와 함께 설명해 주세요.",
+    "intent": "JVM의 동작 원리와 런타임 데이터 영역에 대한 이해도 확인",
+    "eval_check_list": ["컴파일러(javac) 언급", "클래스 로더 역할", "Runtime Data Area 구조 설명"],
+    "follow_ups": ["BE-JAVA-002"]
+  },
+  "BE-JAVA-002": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Hard",
+    "question": "GC의 기본 원리와 대표적인 Collector인 G1 GC의 동작 방식을 설명해주세요.",
+    "tts_text": "가비지 컬렉션의 기본 원리와 지원 가비지 컬렉터의 동작 방식을 설명해 주세요.",
+    "intent": "메모리 관리 최적화 및 최신 GC 알고리즘 이해 여부 확인",
+    "eval_check_list": ["Stop-the-world 개념", "Region 단위 관리 언급", "Mark-Sweep-Compact 단계"],
+    "follow_ups": []
+  },
+  "BE-JAVA-003": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Easy",
+    "question": "Primitive 타입과 Reference 타입의 메모리 저장 방식 차이는 무엇인가요?",
+    "tts_text": "프리미티브 타입과 레퍼런스 타입의 메모리 저장 방식 차이는 무엇인가요?",
+    "intent": "스택과 힙 메모리 할당 방식의 기초 지식 확인",
+    "eval_check_list": ["Stack에 실제 값 저장 여부", "Heap에 객체 주소 저장", "Call by Value 개념"],
+    "follow_ups": []
+  },
+  "BE-JAVA-004": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Medium",
+    "question": "Java에서 String이 불변인 이유와 StringBuilder의 차이점을 설명해주세요.",
+    "tts_text": "자바에서 스트링이 불변인 이유와 스트링 빌더의 차이점을 설명해 주세요.",
+    "intent": "불변 객체의 안정성과 메모리 효율성 이해 확인",
+    "eval_check_list": ["String Constant Pool 언급", "Thread-safe 이점", "가변 객체와의 성능 차이"],
+    "follow_ups": []
+  },
+  "BE-JAVA-005": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Medium",
+    "question": "Checked Exception과 Unchecked Exception의 차이와 처리 전략을 설명해주세요.",
+    "tts_text": "체크드 익셉션과 언체크드 익셉션의 차이와 처리 전략을 설명해 주세요.",
+    "intent": "예외 처리 철학과 트랜잭션 롤백 정책 이해 확인",
+    "eval_check_list": ["컴파일 시점 체크 여부", "RuntimeException 상속 여부", "Rollback 정책 차이"],
+    "follow_ups": []
+  },
+  "BE-JAVA-006": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Easy",
+    "question": "객체지향 프로그래밍(OOP)의 4대 요소에 대해 설명해주세요.",
+    "tts_text": "객체지향 프로그래밍의 사대 요소에 대해 설명해 주세요.",
+    "intent": "기초 설계 원칙 이해도 확인",
+    "eval_check_list": ["캡슐화", "상속", "다형성", "추상화"],
+    "follow_ups": ["BE-JAVA-007", "BE-JAVA-008"]
+  },
+  "BE-JAVA-007": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Medium",
+    "question": "인터페이스와 추상 클래스의 결정적인 차이와 활용 사례를 설명해주세요.",
+    "tts_text": "인터페이스와 추상 클래스의 결정적인 차이와 활용 사례를 설명해 주세요.",
+    "intent": "상속과 구현의 설계 의도 파악",
+    "eval_check_list": ["다중 상속 가능 여부", "상태(변수) 보유 여부", "is-a vs can-do 관계"],
+    "follow_ups": []
+  },
+  "BE-JAVA-008": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Easy",
+    "question": "Overriding과 Overloading의 차이를 다형성과 연결하여 설명해주세요.",
+    "tts_text": "오버라이딩과 오버로딩의 차이를 다형성과 연결하여 설명해 주세요.",
+    "intent": "다형성의 정적/동적 구현 방식 이해 확인",
+    "eval_check_list": ["상속 관계 여부", "메서드 시그니처 차이", "컴파일 타임 vs 런타임 다형성"],
+    "follow_ups": []
+  },
+  "BE-JAVA-009": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Hard",
+    "question": "Java 제네릭의 Type Erasure가 무엇이며, 와일드카드는 왜 사용하나요?",
+    "tts_text": "자바 제네릭의 타입 이레이저가 무엇이며, 와일드카드는 왜 사용하나요?",
+    "intent": "제네릭의 내부 동작 원리와 공변/불공변성 이해 확인",
+    "eval_check_list": ["하위 호환성 언급", "컴파일 시 타입 제거", "PECS 원칙 언급"],
+    "follow_ups": []
+  },
+  "BE-JAVA-010": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Medium",
+    "question": "람다식과 스트림 API를 사용했을 때의 장점과 성능상 주의점을 설명해주세요.",
+    "tts_text": "람다식과 스트림 에이피아이를 사용했을 때의 장점과 성능상 주의점을 설명해 주세요.",
+    "intent": "함수형 프로그래밍 도입 배경 및 효율성 파악",
+    "eval_check_list": ["가독성 향상", "병렬 처리 용이성", "디버깅의 어려움 및 오버헤드"],
+    "follow_ups": []
+  },
+  "BE-JAVA-011": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Hard",
+    "question": "멀티 쓰레드 환경에서 Thread-safety를 보장하기 위한 방법들을 설명해주세요.",
+    "tts_text": "멀티 쓰레드 환경에서 쓰레드 세이프티를 보장하기 위한 방법들을 설명해 주세요.",
+    "intent": "동시성 이슈 제어 능력 확인",
+    "eval_check_list": ["임계 영역(Critical Section)", "Lock/Synchronized", "Atomic 클래스 및 Immutable 객체"],
+    "follow_ups": ["BE-JAVA-012"]
+  },
+  "BE-JAVA-012": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Medium",
+    "question": "Synchronized 키워드와 ReentrantLock의 차이점은 무엇인가요?",
+    "tts_text": "싱크로나이즈드 키워드와 리엔트런트 락의 차이점은 무엇인가요?",
+    "intent": "명시적 락과 암묵적 락의 세밀한 제어 차이 이해 확인",
+    "eval_check_list": ["공정성(Fairness) 옵션 여부", "Lock 획득 대기 타임아웃", "가독성 차이"],
+    "follow_ups": []
+  },
+  "BE-JAVA-013": {
+    "role": "BACKEND",
+    "stacks": ["java"],
+    "difficulty": "Hard",
+    "question": "데드락 발생 조건 4가지와 이를 방지하기 위한 방법을 설명해주세요.",
+    "tts_text": "데드락 발생 조건 네 가지와 이를 방지하기 위한 방법을 설명해 주세요.",
+    "intent": "교착 상태 방지를 위한 OS 및 애플리케이션 설계 지식 확인",
+    "eval_check_list": ["상호 배제, 점유 대기, 비선점, 순환 대기", "순환 대기 제거 전략"],
+    "follow_ups": []
+  },
+  "BE-JAVA-014": {
+    "role": "BACKEND",
+    "stacks": ["spring"],
+    "difficulty": "Medium",
+    "question": "Spring IoC와 DI가 무엇이며, 테스트 코드 작성에 어떤 도움을 주나요?",
+    "tts_text": "스프링 아이오씨와 디아이 가 무엇이며, 테스트 코드 작성에 어떤 도움을 주나요?",
+    "intent": "제어의 역전과 의존성 주입의 실질적 가치 파악",
+    "eval_check_list": ["결합도 감소", "Mock 객체 활용 가능성", "유연한 설정 변경"],
+    "follow_ups": []
+  },
+  "BE-JAVA-015": {
+    "role": "BACKEND",
+    "stacks": ["spring"],
+    "difficulty": "Medium",
+    "question": "스프링 빈의 생명주기와 초기화 시점의 로직 구현 방법을 설명해주세요.",
+    "tts_text": "스프링 빈의 생명주기와 초기화 시점의 로직 구현 방법을 설명해 주세요.",
+    "intent": "빈 관리 메커니즘 이해 확인",
+    "eval_check_list": ["생성-의존관계 주입-초기화-소멸", "@PostConstruct 언급", "InitializingBean 인터페이스"],
+    "follow_ups": []
+  },
+  "BE-JAVA-016": {
+    "role": "BACKEND",
+    "stacks": ["spring"],
+    "difficulty": "Medium",
+    "question": "AOP를 사용하여 공통 관심사를 분리하는 이유와 원리를 설명해주세요.",
+    "tts_text": "에이오피를 사용하여 공통 관심사를 분리하는 이유와 원리를 설명해 주세요.",
+    "intent": "관점 지향 프로그래밍과 프록시 패턴 이해 확인",
+    "eval_check_list": ["횡단 관심사(Cross-cutting Concerns)", "프록시(Proxy) 객체 언급", "코드 중복 제거"],
+    "follow_ups": []
+  },
+  "BE-JAVA-017": {
+    "role": "BACKEND",
+    "stacks": ["spring"],
+    "difficulty": "Hard",
+    "question": "@Transactional 전파 속성 중 REQUIRES_NEW는 언제 사용하나요?",
+    "tts_text": "엣 트랜잭셔널 전파 속성 중 리콰이어즈 뉴 는 언제 사용하나요?",
+    "intent": "트랜잭션 관리 심화 지식 및 독립적 커밋/롤백 전략 파악",
+    "eval_check_list": ["기존 트랜잭션 보류", "별도 트랜잭션 생성", "로그 기록 등 독립 작업 사례"],
+    "follow_ups": []
+  },
+  "BE-JAVA-018": {
+    "role": "BACKEND",
+    "stacks": ["spring"],
+    "difficulty": "Medium",
+    "question": "DispatcherServlet이 요청을 처리하는 전체 흐름을 설명해주세요.",
+    "tts_text": "디스패처 서블릿이 요청을 처리하는 전체 흐름을 설명해 주세요.",
+    "intent": "Spring MVC의 동작 구조 파악",
+    "eval_check_list": ["HandlerMapping", "HandlerAdapter", "ModelAndView/ViewResolver"],
+    "follow_ups": []
+  },
+  "BE-JAVA-019": {
+    "role": "BACKEND",
+    "stacks": ["db_sql"],
+    "difficulty": "Medium",
+    "question": "DB 커넥션 풀을 사용하는 이유와 사이즈 결정 시 고려 사항을 설명해주세요.",
+    "tts_text": "디비 커넥션 풀을 사용하는 이유와 사이즈 결정 시 고려 사항을 설명해 주세요.",
+    "intent": "리소스 관리 효율성 및 인프라 최적화 이해도 확인",
+    "eval_check_list": ["커넥션 생성 비용 절감", "HikariCP 언급", "WAS 쓰레드 수와 DB 부하 관계"],
+    "follow_ups": []
+  },
+  "BE-JAVA-020": {
+    "role": "BACKEND",
+    "stacks": ["java", "spring"],
+    "difficulty": "Medium",
+    "question": "실무에서 활용해본 디자인 패턴 하나를 효과와 함께 설명해주세요.",
+    "tts_text": "실무에서 활용해본 디자인 패턴 하나를 효과와 함께 설명해 주세요.",
+    "intent": "설계적 고민과 유지보수 효율성에 대한 경험 확인",
+    "eval_check_list": ["패턴 이름 언급", "사용 전후 문제 해결 사례", "Spring 내 적용 예시(예: Singleton)"],
+    "follow_ups": []
+  }
+}
