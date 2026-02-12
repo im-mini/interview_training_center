@@ -104,102 +104,152 @@
     </div>
 
     <script>
-        let allQuestions = {};
-        let filteredKeys = [];
-        let currentIndex = 0;
-        let selectedLevel = 'NEWBIE';
-        let isAutoMode = false;
-        let autoTimer;
+    let allQuestions = {};
+    let filteredKeys = [];
+    let currentIndex = 0;
+    let selectedLevel = 'NEWBIE'; // 기본값
+    let isAutoMode = false;
+    let autoTimer;
+    let isDataLoaded = false;
 
-        // 1. 데이터 로딩
-        fetch('/data/java.json')
-            .then(res => res.json())
-            .then(data => { allQuestions = data; });
+    // 1. 데이터 로딩 (경로 확인 필수: /data/java.json)
+    fetch('/data/java.json')
+        .then(res => {
+            if (!res.ok) throw new Error('JSON 파일을 찾을 수 없습니다.');
+            return res.json();
+        })
+        .then(data => { 
+            allQuestions = data; 
+            isDataLoaded = true;
+            console.log("데이터 로드 완료:", Object.keys(data).length, "개의 질문");
+        })
+        .catch(err => {
+            console.error("데이터 로드 실패:", err);
+            alert("데이터를 불러오지 못했습니다. 경로를 확인해주세요.");
+        });
 
-        function selectLevel(level, el) {
-            selectedLevel = level;
-            document.querySelectorAll('.level-select .option-box').forEach(box => box.classList.remove('active'));
-            el.classList.add('active');
+    // 레벨 선택 함수
+    function selectLevel(level, el) {
+        selectedLevel = level;
+        // UI 업데이트
+        document.querySelectorAll('.level-select .option-box').forEach(box => box.classList.remove('active'));
+        el.classList.add('active');
+        console.log("선택된 레벨:", selectedLevel);
+    }
+
+    // 2. 훈련 시작 초기화
+    function initTraining() {
+        if (!isDataLoaded) {
+            alert("데이터가 아직 로딩 중입니다. 잠시만 기다려주세요.");
+            return;
         }
 
-        // 2. 훈련 시작 초기화
-        function initTraining() {
-            filteredKeys = Object.keys(allQuestions).filter(key => allQuestions[key].level === selectedLevel);
-            isAutoMode = document.querySelector('input[name="mode"]:checked').value === 'auto';
-            
-            if(filteredKeys.length === 0) { alert("해당 레벨의 질문이 없습니다."); return; }
-            
-            document.getElementById('setup-screen').classList.add('hidden');
-            document.getElementById('training-screen').classList.remove('hidden');
-            document.getElementById('display-level').innerText = `LEVEL: ${selectedLevel}`;
-            
-            renderQuestion();
+        // 필터링 로직 강화: 대소문자 무관하게 비교
+        filteredKeys = Object.keys(allQuestions).filter(key => {
+            const qLevel = allQuestions[key].level.toUpperCase();
+            return qLevel === selectedLevel.toUpperCase();
+        });
+
+        console.log("필터링된 질문 수:", filteredKeys.length);
+
+        if (filteredKeys.length === 0) { 
+            alert(`[오류] ${selectedLevel} 레벨에 해당하는 질문 데이터가 JSON에 없습니다.\n전체 질문 수: ${Object.keys(allQuestions).length}`); 
+            return; 
+        }
+        
+        isAutoMode = document.querySelector('input[name="mode"]:checked').value === 'auto';
+        
+        document.getElementById('setup-screen').classList.add('hidden');
+        document.getElementById('training-screen').classList.remove('hidden');
+        document.getElementById('display-level').innerText = `LEVEL: ${selectedLevel}`;
+        
+        currentIndex = 0; // 인덱스 초기화
+        renderQuestion();
+    }
+
+    // 3. 질문 출력 및 TTS
+    function renderQuestion() {
+        const qKey = filteredKeys[currentIndex];
+        const qData = allQuestions[qKey];
+        
+        if (!qData) {
+            alert("질문 데이터를 불러오는 데 실패했습니다.");
+            return;
         }
 
-        // 3. 질문 출력 및 TTS
-        function renderQuestion() {
-            const qData = allQuestions[filteredKeys[currentIndex]];
-            document.getElementById('question-text').innerText = `Q: ${qData.question}`;
-            document.getElementById('q-counter').innerText = `PHASE: ${currentIndex + 1} / ${filteredKeys.length}`;
-            document.getElementById('auto-gauge').style.width = '0%';
-            document.getElementById('auto-msg').innerText = '';
+        document.getElementById('question-text').innerText = `Q: ${qData.question}`;
+        document.getElementById('q-counter').innerText = `PHASE: ${currentIndex + 1} / ${filteredKeys.length}`;
+        document.getElementById('auto-gauge').style.transition = 'none';
+        document.getElementById('auto-gauge').style.width = '0%';
+        document.getElementById('auto-msg').innerText = '';
 
-            // 타이머 (60초 시각화)
-            const bar = document.getElementById('timer-bar');
-            bar.style.transition = 'none'; bar.style.width = '100%';
-            setTimeout(() => { bar.style.transition = 'width 60s linear'; bar.style.width = '0%'; }, 100);
+        // 타이머 시각화 (60초)
+        const bar = document.getElementById('timer-bar');
+        bar.style.transition = 'none'; 
+        bar.style.width = '100%';
+        setTimeout(() => { 
+            bar.style.transition = 'width 60s linear'; 
+            bar.style.width = '0%'; 
+        }, 100);
 
-            // TTS
-            const uttr = new SpeechSynthesisUtterance(qData.tts_text);
-            uttr.lang = 'ko-KR'; uttr.rate = 0.9;
-            window.speechSynthesis.speak(uttr);
-        }
+        // TTS 실행
+        window.speechSynthesis.cancel(); // 이전 음성 중지
+        const uttr = new SpeechSynthesisUtterance(qData.tts_text);
+        uttr.lang = 'ko-KR'; 
+        uttr.rate = 1.0;
+        window.speechSynthesis.speak(uttr);
+    }
 
-        // 4. 복기 화면 열기
-        function showReview() {
-            window.speechSynthesis.cancel();
-            clearTimeout(autoTimer);
-            
-            const qData = allQuestions[filteredKeys[currentIndex]];
-            const listContent = document.getElementById('checklist-content');
-            listContent.innerHTML = '';
-            
+    // 4. 복기 화면 열기
+    function showReview() {
+        window.speechSynthesis.cancel();
+        clearTimeout(autoTimer);
+        
+        const qData = allQuestions[filteredKeys[currentIndex]];
+        const listContent = document.getElementById('checklist-content');
+        listContent.innerHTML = '';
+        
+        if (qData.eval_check_list && qData.eval_check_list.length > 0) {
             qData.eval_check_list.forEach((item, i) => {
                 listContent.innerHTML += `<div class="check-item"><input type="checkbox" id="c${i}"><label for="c${i}">${item}</label></div>`;
             });
-
-            document.getElementById('review-modal').classList.remove('hidden');
+        } else {
+            listContent.innerHTML = '<p>체크리스트 정보가 없습니다.</p>';
         }
 
-        // 5. 복기 닫기 및 다음 이동
-        function closeReview() {
-            document.getElementById('review-modal').classList.add('hidden');
-            
-            if (currentIndex < filteredKeys.length - 1) {
-                currentIndex++;
-                if (isAutoMode) {
-                    startAutoCount();
-                } else {
-                    renderQuestion();
-                }
+        document.getElementById('review-modal').classList.remove('hidden');
+    }
+
+    // 5. 복기 닫기 및 다음 이동
+    function closeReview() {
+        document.getElementById('review-modal').classList.add('hidden');
+        
+        if (currentIndex < filteredKeys.length - 1) {
+            currentIndex++;
+            if (isAutoMode) {
+                startAutoCount();
             } else {
-                alert("훈련이 모두 종료되었습니다.");
-                location.reload();
-            }
-        }
-
-        // 6. 자동 모드 카운트다운
-        function startAutoCount() {
-            let sec = 7;
-            const gauge = document.getElementById('auto-gauge');
-            document.getElementById('auto-msg').innerText = `${sec}초 후 자동 다음 질문...`;
-            gauge.style.transition = `width ${sec}s linear`;
-            gauge.style.width = '100%';
-
-            autoTimer = setTimeout(() => {
                 renderQuestion();
-            }, sec * 1000);
+            }
+        } else {
+            alert("모든 리허설 과정이 종료되었습니다. 고생하셨습니다!");
+            location.reload();
         }
-    </script>
+    }
+
+    // 6. 자동 모드 카운트다운
+    function startAutoCount() {
+        let sec = 7;
+        const gauge = document.getElementById('auto-gauge');
+        document.getElementById('auto-msg').innerText = `${sec}초 후 다음 질문 이동...`;
+        
+        gauge.style.transition = `width ${sec}s linear`;
+        gauge.style.width = '100%';
+
+        autoTimer = setTimeout(() => {
+            renderQuestion();
+        }, sec * 1000);
+    }
+</script>
 </body>
 </html>
