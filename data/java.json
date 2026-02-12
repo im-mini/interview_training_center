@@ -1,0 +1,82 @@
+{
+  "BE-JAVA-NEW-001": {
+    "level": "NEWBIE",
+    "question": "JVM의 메모리 구조와 각 영역의 역할을 설명해주세요.",
+    "tts_text": "제이뷔엠의 메모리 구조와 각 영역의 역할을 설명해 주세요.",
+    "intent": "자바 실행 원리 및 메모리 관리 기초 지식 확인",
+    "eval_check_list": ["Stack과 Heap의 차이 설명", "Method Area 역할 언급", "GC 대상 영역 식별"]
+  },
+  "BE-JAVA-NEW-002": {
+    "level": "NEWBIE",
+    "question": "Checked Exception과 Unchecked Exception의 차이는 무엇인가요?",
+    "tts_text": "체크드 익셉션과 언체크드 익셉션의 차이는 무엇인가요?",
+    "intent": "예외 처리 전략 및 트랜잭션 롤백 이해도 확인",
+    "eval_check_list": ["RuntimeException 상속 여부", "컴파일 시점 체크 여부", "예외 처리 강제성 차이"]
+  },
+  "BE-JAVA-NEW-003": {
+    "level": "NEWBIE",
+    "question": "추상 클래스와 인터페이스의 차이점을 설명해주세요.",
+    "tts_text": "추상 클래스와 인터페이스의 차이점을 설명해 주세요.",
+    "intent": "객체지향 설계 원칙 이해도 확인",
+    "eval_check_list": ["다중 상속 가능 여부", "사용 목적의 차이(is-a vs can-do)", "필드 유무 차이"]
+  },
+  "BE-JAVA-NEW-004": {
+    "level": "NEWBIE",
+    "question": "String, StringBuilder, StringBuffer의 차이는 무엇인가요?",
+    "tts_text": "스트링, 스트링 빌더, 스트링 버퍼의 차이는 무엇인가요?",
+    "intent": "불변 객체 및 동시성 제어 기초 확인",
+    "eval_check_list": ["불변성 여부", "Thread-safe 여부", "성능 차이 발생 이유"]
+  },
+  "BE-JAVA-NEW-005": {
+    "level": "NEWBIE",
+    "question": "Spring의 DI(의존성 주입)가 왜 필요한지 설명해주세요.",
+    "tts_text": "스프링의 디아이 가 왜 필요한지 설명해 주세요.",
+    "intent": "제어의 역전(IoC)을 통한 결합도 감소 이해 확인",
+    "eval_check_list": ["객체 간 결합도 감소", "유지보수성 향상", "테스트 용이성"]
+  },
+  "BE-JAVA-NEW-006": { "level": "NEWBIE", "question": "Java의 컬렉션 프레임워크 중 List와 Set의 차이는?", "tts_text": "리스트와 셋의 차이는 무엇인가요?", "intent": "자료구조 기초 활용 능력 확인", "eval_check_list": ["순서 유지 여부", "중복 허용 여부", "인덱스 접근 가능 여부"] },
+  "BE-JAVA-NEW-007": { "level": "NEWBIE", "question": "OOP의 4대 요소에 대해 설명해주세요.", "tts_text": "오오피의 사대 요소에 대해 설명해 주세요.", "intent": "객체지향 프로그래밍 기본 개념 확인", "eval_check_list": ["캡슐화", "상속", "다형성", "추상화"] },
+  "BE-JAVA-NEW-008": { "level": "NEWBIE", "question": "Garbage Collection의 동작 원리를 간단히 설명해주세요.", "tts_text": "가비지 컬렉션의 동작 원리를 간단히 설명해 주세요.", "intent": "메모리 관리 메커니즘 이해 확인", "eval_check_list": ["Mark and Sweep", "Stop-the-world 개념", "Unreachable 객체 제거"] },
+  "BE-JAVA-NEW-009": { "level": "NEWBIE", "question": "Overriding과 Overloading의 차이는?", "tts_text": "오버라이딩과 오버로딩의 차이는 무엇인가요?", "intent": "다형성 구현 방식 구분 능력 확인", "eval_check_list": ["상속 관계 여부", "시그니처 동일 여부", "정적/동적 바인딩 구분"] },
+  "BE-JAVA-NEW-010": { "level": "NEWBIE", "question": "Rest API의 특징을 설명해주세요.", "tts_text": "레스트 에이피아이의 특징을 설명해 주세요.", "intent": "웹 통신 기본 규약 이해 확인", "eval_check_list": ["Stateless성", "HTTP 메서드 활용", "자원 기반 주소 설계"] },
+
+  "BE-JAVA-SEN-001": {
+    "level": "SENIOR",
+    "question": "MSA 환경에서 서비스 간 트랜잭션 일관성을 어떻게 유지하나요?",
+    "tts_text": "엠에스에이 환경에서 서비스 간 트랜잭션 일관성을 어떻게 유지하나요?",
+    "intent": "분산 시스템 아키텍처 및 트랜잭션 설계 능력 확인",
+    "eval_check_list": ["Saga 패턴(Choreography/Orchestration) 언급", "2PC의 한계점 설명", "Eventual Consistency 개념"]
+  },
+  "BE-JAVA-SEN-002": {
+    "level": "SENIOR",
+    "question": "대규모 트래픽 발생 시 데이터베이스 부하를 줄이기 위한 전략을 설명해주세요.",
+    "tts_text": "대규모 트래픽 발생 시 데이터베이스 부하를 줄이기 위한 전략을 설명해 주세요.",
+    "intent": "인프라 확장성 및 성능 최적화 경험 확인",
+    "eval_check_list": ["Query 튜닝 및 인덱스 최적화", "Caching(Redis) 활용", "Read/Write 복제(Replication)"]
+  },
+  "BE-JAVA-SEN-003": {
+    "level": "SENIOR",
+    "question": "Spring의 락(Lock) 종류와 분산 환경에서의 동시성 해결 방안은?",
+    "tts_text": "스프링의 락 종류와 분산 환경에서의 동시성 해결 방안은 무엇인가요?",
+    "intent": "동시성 이슈 제어 및 실무 해결 능력 확인",
+    "eval_check_list": ["낙관적 락 vs 비관적 락", "분산 락(Redis/Redisson) 언급", "데이터 정합성 보장 전략"]
+  },
+  "BE-JAVA-SEN-004": {
+    "level": "SENIOR",
+    "question": "가비지 컬렉터 중 G1 GC와 ZGC의 차이점과 선택 기준을 설명해주세요.",
+    "tts_text": "지 원 지씨와 제트 지씨의 차이점과 선택 기준을 설명해 주세요.",
+    "intent": "JVM 심화 성능 튜닝 지식 확인",
+    "eval_check_list": ["Pause Time(STW) 제어 성능 차이", "Region 기반 메모리 관리 차이", "Heap 사이즈에 따른 선택"]
+  },
+  "BE-JAVA-SEN-005": {
+    "level": "SENIOR",
+    "question": "외부 API 장애가 우리 서비스로 전파되지 않게 하는 방안을 설명해주세요.",
+    "tts_text": "외부 에이피아이 장애가 우리 서비스로 전파되지 않게 하는 방안을 설명해 주세요.",
+    "intent": "시스템 안정성 및 내결함성 설계 능력 확인",
+    "eval_check_list": ["Circuit Breaker 패턴", "Resilience4j 활용", "Fallback 로직 설계"]
+  },
+  "BE-JAVA-SEN-006": { "level": "SENIOR", "question": "JPA 사용 시 N+1 문제의 발생 원인과 해결 방법은?", "tts_text": "제이피에이 사용 시 엔 플러스 일 문제의 발생 원인과 해결 방법은 무엇인가요?", "intent": "ORM 성능 최적화 이해도 확인", "eval_check_list": ["Fetch Join 활용", "EntityGraph", "Batch Size 설정"] },
+  "BE-JAVA-SEN-007": { "level": "SENIOR", "question": "객체지향 5대 원칙(SOLID)을 실무 설계에 어떻게 적용하시나요?", "tts_text": "솔리드 원칙을 실무 설계에 어떻게 적용하시나요?", "intent": "코드 품질 및 유지보수 설계 철학 확인", "eval_check_list": ["각 원칙별 실제 사례", "OCP와 결합도 관계", "ISP의 인터페이스 설계"] },
+  "BE-JAVA-SEN-008": { "level": "SENIOR", "question": "JVM Warm-up이 필요한 이유와 방법은 무엇인가요?", "tts_text": "제이뷔엠 웜업이 필요한 이유와 방법은 무엇인가요?", "intent": "런타임 성능 최적화 및 안정성 확보 능력 확인", "eval_check_list": ["JIT 컴파일러 동작 방식", "Class Loading 오버헤드", "Traffic Steering 전략"] },
+  "BE-JAVA-SEN-010": { "level": "SENIOR", "question": "테스트 코드를 작성할 때 가장 중요하게 생각하는 원칙은 무엇인가요?", "tts_text": "테스트 코드를 작성할 때 가장 중요하게 생각하는 원칙은 무엇인가요?", "intent": "QA 품질 및 테스트 자동화 철학 확인", "eval_check_list": ["FIRST 원칙", "경계값 분석", "Mocking 전략 및 단위 테스트의 독립성"] }
+}
